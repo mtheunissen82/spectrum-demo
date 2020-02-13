@@ -9,30 +9,77 @@
             background-color: #c2c8ce;
         }
 
-        #app {}
+        #app {
+            display: grid;
+
+            grid-template-areas:
+                "header header header"
+                "left main right"
+                "footer footer footer";
+
+            grid-template-columns: 200px 1fr 200px;
+            grid-template-rows: auto 1fr auto;
+            /* grid-gap: 10px; */
+
+            height: 100vh;
+        }
+
+        header {
+            grid-area: header;
+
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #left {
+            grid-area: left;
+            margin-right: 0.5rem;
+        }
+
+        main {
+            grid-area: main;
+        }
+
+        #right {
+            grid-area: right;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            grid-area: footer;
+        }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <div class="container">
-            <header>
-                <h1>Dieren applicatie</h1>
+        <header>
+            <h1>Dieren applicatie</h1>
+        </header>
 
-                <nav class="navbar navbar-dark bg-dark justify-content-start">
-                    <a class="navbar-brand" href="/"><i class="fas fa-paw"></i></a>
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/dier">Dieren</a>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+        <aside id="left">
+            left
+        </aside>
 
-            <section class="content">
-                @yield('content')
-            </section>
-        </div>
+        <main>
+            <nav class="navbar navbar-dark bg-dark justify-content-start">
+                <a class="navbar-brand" href="/"><i class="fas fa-paw"></i></a>
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/dier">Dieren</a>
+                    </li>
+                </ul>
+            </nav>
+
+            @yield('content')
+        </main>
+
+        <aside id="right">
+            right
+        </aside>
+
+        <footer>footer</footer>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>

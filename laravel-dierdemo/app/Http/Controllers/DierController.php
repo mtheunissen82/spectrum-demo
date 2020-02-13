@@ -24,6 +24,10 @@ class DierController extends Controller
 
     public function insert(Request $request)
     {
+        $request->validate([
+            'type' => 'required',
+        ]);
+
         $dier = new Dier();
         $dier->type = $request->input('type');
         $dier->naam = $request->input('naam');
@@ -44,12 +48,9 @@ class DierController extends Controller
     {
         $dier->type = $request->input('type');
         $dier->naam = $request->input('naam');
+        $dier->save();
 
-        if ($dier->save()) {
-            echo "opgeslagen";
-        } else {
-            echo "niet opgeslagen";
-        }
+        return redirect()->route('dier.edit', ['dier' => $dier->id]);
     }
 
     public function delete(Dier $dier)

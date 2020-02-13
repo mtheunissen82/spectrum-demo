@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-    <h2>Dier detailpagina (show)</h2>
+    <h2>Dier detailpagina</h2>
     <p>type: {{ $dier->type }}</p>
     <p>naam: {{ $dier->naam }}</p>
     <button onclick="window.history.back()">Terug naar vorige pagina</button><br>

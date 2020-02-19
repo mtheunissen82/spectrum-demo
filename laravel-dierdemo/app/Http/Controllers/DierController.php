@@ -25,7 +25,8 @@ class DierController extends Controller
     public function insert(Request $request)
     {
         $request->validate([
-            'type' => 'required',
+            'type' => 'required|max:10|alpha',
+            'naam' => 'required|max:10',
         ]);
 
         $dier = new Dier();

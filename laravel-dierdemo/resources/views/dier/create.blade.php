@@ -18,7 +18,7 @@
         @csrf
         <div class="form-group">
             <label for="type">type:</label>
-            <input id="type" type="text" name="type" class="form-control @error('type') is-invalid @enderror">
+            <input id="type" type="text" name="type" class="form-control @error('type') is-invalid @enderror" value="{{ old('type') }}">
 
             @error('type')
             <div class="alert alert-danger">{{ $message }}</div>
@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             <label for="naam">naam:</label>
-            <input id="naam" type="text" name="naam" class="form-control @error('naam') is-invalid @enderror">
+            <input id="naam" type="text" name="naam" class="form-control @error('naam') is-invalid @enderror" value="{{ old('naam') }}">
 
             @error('naam')
             <div class="alert alert-danger">{{ $message }}</div>

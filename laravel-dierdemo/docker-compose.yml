@@ -16,8 +16,6 @@ services:
       - .:/var/www/html
     networks:
       dierdemo-network:
-        aliases:
-          - dierdemo-app
 
   mysql-dierdemo-db:
     image: mysql:8.0.19
@@ -31,8 +29,6 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
     networks:
       dierdemo-network:
-        aliases:
-          - mysql-dierdemo-db
 
 networks:
   dierdemo-network:

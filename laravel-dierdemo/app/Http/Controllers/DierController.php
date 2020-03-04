@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Dier;
+use App\DierSoort;
+use Illuminate\Http\Request;
 
 class DierController extends Controller
 {
@@ -19,19 +20,27 @@ class DierController extends Controller
 
     public function create()
     {
-        return view('dier.create');
+        return view('dier.create', ["dierSoorten" => DierSoort::all()]);
     }
 
     public function insert(Request $request)
     {
         $request->validate([
-            'type' => 'required|max:10|alpha',
+            'soort' => 'required|integer',
             'naam' => 'required|max:10',
         ]);
 
+        $dierSoort = DierSoort::find($request->input('soort'));
+
+        // always validate user input
+        if (!$dierSoort) {
+            echo "diersoort niet geldig! exit code";
+            exit;
+        }
+
         $dier = new Dier();
-        $dier->type = $request->input('type');
         $dier->naam = $request->input('naam');
+        $dier->soort()->associate($dierSoort);
 
         if ($dier->save()) {
             return redirect()->route('dier.index');
@@ -42,13 +51,18 @@ class DierController extends Controller
 
     public function edit(Dier $dier)
     {
-        return view('dier.edit', ['dier' => $dier]);
+        return view('dier.edit', ['dier' => $dier, 'dierSoorten' => DierSoort::all()]);
     }
 
     public function update(Request $request, Dier $dier)
     {
-        $dier->type = $request->input('type');
+        $request->validate([
+            'soort' => 'required|integer',
+            'naam' => 'required|max:10',
+        ]);
+
         $dier->naam = $request->input('naam');
+        $dier->soort()->associate(DierSoort::find($request->input('soort')));
         $dier->save();
 
         return redirect()->route('dier.edit', ['dier' => $dier->id]);

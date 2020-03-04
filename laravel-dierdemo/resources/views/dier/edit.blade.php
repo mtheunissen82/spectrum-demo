@@ -6,12 +6,32 @@
     <form method="POST">
         @csrf
 
-        <label for="type">type:</label>
-        <input id="type" type="text" name="type" value="{{ $dier->type }}"><br>
-        <label for="naam">naam:</label>
-        <input id="naam" type="text" name="naam" value="{{ $dier->naam }}"><br>
+        <div class="form-group">
+            <label for="soort">soort:</label>
+            <select name="soort" class="form-control @error('soort') is-invalid @enderror">
+                <option value="">--- Selecteer soort ---</option>
+                @foreach ($dierSoorten as $dierSoort)
+                <option value="{{ $dierSoort->id }}" @if ($dier->soort->id == $dierSoort->id) selected @endif>{{ $dierSoort->naam }}</option>
+                @endforeach
+            </select>
 
-        <button class="btn btn-primary">Dier wijzigen</button>
+            @error('soort')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="naam">naam:</label>
+            <input id="naam" class="form-control" type="text" name="naam" value="{{ $dier->naam }}">
+
+            @error('naam')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary">Dier wijzigen</button>
+        </div>
     </form>
 </div>
 @endsection

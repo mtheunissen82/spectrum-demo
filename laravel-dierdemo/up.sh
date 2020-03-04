@@ -11,11 +11,11 @@ if [[ ! -f .env ]]; then
   echo -e "UID=${UID}" >> .env
 fi
 
-echo -e "\nSTEP: cleaning up previous database data directory"
-sudo rm -rfv "run/var/*"
-
 echo -e "\nSTEP: cleaning up previous docker-compose containers"
 docker-compose down
+
+echo -e "\nSTEP: cleaning up previous database data directory"
+sudo rm -rfv ./run/var/*
 
 echo -e "\nSTEP: docker-compose build/up"
 docker-compose build && docker-compose up -d
@@ -26,9 +26,9 @@ docker exec laravel-dierdemo-app bash -c "composer install"
 echo -e "\nSTEP: execute artisan key:generate"
 docker exec laravel-dierdemo-app bash -c "php artisan key:generate"
 
-# sleep for 5 seconds before seeding the database
-echo -e "\nsleeping for 5 seconds"
-sleep 5
+# sleep for 10 seconds before seeding the database
+echo -e "\nsleeping for 10 seconds"
+sleep 10
 
 echo -e "\nSTEP: execute artisan migrate:fresh and seed the database"
 docker exec laravel-dierdemo-app bash -c "php artisan migrate:fresh --seed"

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Dier;
+use App\DierSoort;
 
 class DierSeeder extends Seeder
 {
@@ -13,17 +14,17 @@ class DierSeeder extends Seeder
     public function run()
     {
         $dieren = [
-            ["type" => "hond", "naam" => "hendrik"],
-            ["type" => "kat", "naam" => "karel"],
-            ["type" => "schilpad", "naam" => "simon"],
-            ["type" => "paard", "naam" => "pieter"],
-            ["type" => "egel", "naam" => "eduard"],
+            ["naam" => "hendrik", "soort" => DierSoort::where("naam", "hond")->first()],
+            ["naam" => "karel", "soort" => DierSoort::where("naam", "kat")->first()],
+            ["naam" => "simon", "soort" => DierSoort::where("naam", "schilpad")->first()],
+            ["naam" => "pieter", "soort" => DierSoort::where("naam", "paard")->first()],
+            ["naam" => "eduard", "soort" => DierSoort::where("naam", "egel")->first()],
         ];
 
         foreach ($dieren as $dierData) {
             $dier = new Dier();
-            $dier->type = $dierData['type'];
             $dier->naam = $dierData['naam'];
+            $dier->soort()->associate($dierData['soort']);
             $dier->save();
         }
     }

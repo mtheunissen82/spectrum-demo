@@ -5,7 +5,7 @@
     <h2>Dieren overzicht</h2>
     @foreach ($dieren as $dier)
     <p>
-        <a href="{{ route('dier.show', [$dier->id]) }}">type: {{ $dier->type }} naam: {{ $dier->naam }}</a>
+        <a href="{{ route('dier.show', [$dier->id]) }}">soort: {{ $dier->soort->naam }} naam: {{ $dier->naam }}</a>
         <a href="{{ route('dier.edit', [$dier->id]) }}"><i class="fas fa-edit"></i></a>
         <a href="{{ route('dier.delete', [$dier->id]) }}"><i class="fas fa-trash-alt"></i></a>
     </p>

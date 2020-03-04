@@ -79,7 +79,7 @@
                 <a class="navbar-brand" href="/"><i class="fas fa-paw"></i></a>
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/dier">Dieren</a>
+                        <a class="nav-link" href="/admin/dier">Dieren</a>
                     </li>
                 </ul>
             </nav>
